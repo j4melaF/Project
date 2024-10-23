@@ -8,7 +8,7 @@
 <body>
     <h1>Edit Notes</h1>
     
-    <form action="{{ route('updateNote)}}" method="POST">
+    <form action="{{ route('updateNote', ['id'=>$note->id])}}" method="POST">
         @csrf
 
         <label for="title">Title:</label>
@@ -22,9 +22,9 @@
 
         <button type="Submit">Update Note</button>
 
-    </form>
+    </form> <br>
     
-    <form action="{{ route('index'}}" method="GET">
+    <form action="{{ route('notes')}}" method="GET">
         <button type="submit">Back to Notes</button>
     </form>
     

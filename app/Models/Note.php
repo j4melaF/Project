@@ -14,4 +14,6 @@ class Note extends Model
         'description',
         'body',
     ];
+
+    
 }

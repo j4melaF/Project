@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @vite('resources/css/app.css')
     <title>Create Note</title>
     <link rel="stylesheet" href="style.css">
 
@@ -10,20 +11,33 @@
 <body>
 <div class="app-container">
         <header>
-            <h1>Note App</h1>
+            <h1>New Note</h1>
         </header>
 
         <div class="note-input">
-            <textarea id="note-text" placeholder="Write your note here..."></textarea>
-            <button id="add-note-btn">Add Note</button>
+        
+            <form action="{{ route('createNoteSubmit') }}" method="POST">
+                @csrf
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title"><br>
+
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description"><br>
+
+                <label for="body"></label>
+                <textarea id="body" name="body" cols="30" rows="10" placeholder="Write your note here..."></textarea>
+
+                <button type="submit">Add Note</button>
+            </form> <br>
+
+            <form action="{{ route('notes')}}" method="GET">
+                <button type="submit">Back to Notes</button>
+            </form>
+            
+            <!-- <button id="add-note-btn">Add Note</button> -->
         </div>
 
-        <div class="notes-section">
-            <h2>Your Notes</h2>
-            <div id="notes-list"></div>
-        </div>
-    </div>
-
+    
     <script src="app.js"></script>
     
 </body>

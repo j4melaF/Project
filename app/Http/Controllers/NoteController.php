@@ -9,7 +9,7 @@ class NoteController extends Controller
 {
 
 
-    public function index()
+    public function notes()
     {
         $notes = Note::orderBy('created_at', 'asc')->get();
         return view('notes', ['notes' => $notes]);
@@ -21,7 +21,7 @@ class NoteController extends Controller
 
         if (!$note)
         {
-            return redirect()->route('index')->with('error','Note not found');
+            return redirect()->route('notes')->with('error','Note not found');
 
         }
 
@@ -30,7 +30,7 @@ class NoteController extends Controller
 
     }
 
-    public function createNote()
+    public function createNote(Request $request)
     {
         return view('create-note');
     }
@@ -51,7 +51,7 @@ class NoteController extends Controller
     $note->body = $validated['body'];
     $note->save();
 
-    return redirect()->route('index')->with('success','Note created Successfully.');
+    return redirect()->route('notes')->with('success','Note created Successfully.');
         
     }
 
@@ -61,7 +61,7 @@ class NoteController extends Controller
 
         if (!$note)
         {
-            return redirect()->route('index')->with('error','Note not found');
+            return redirect()->route('notes')->with('error','Note not found');
         }
         return view('edit-note', ['note' => $note]);
         
@@ -80,7 +80,7 @@ class NoteController extends Controller
 
         if (!$note)
         {
-            return redirect()->route('index')->with('error','Note not found');
+            return redirect()->route('notes')->with('error','Note not found');
         }
 
 
@@ -89,7 +89,7 @@ class NoteController extends Controller
         $note->body = $validated['body'];
         $note->save();
 
-        return redirect()->route('showNote', ['id' => $note->id])->with('success','Note updated Successfully.');
+        return redirect()->route('showNotes', ['id' => $note->id])->with('success','Note updated Successfully.');
         
     }
 
@@ -101,7 +101,7 @@ class NoteController extends Controller
         {
             $note->delete();
         }
-        return redirect()->route('index')->with('success','Note deleted successfully.');
+        return redirect()->route('notes')->with('success','Note deleted successfully.');
 
     }
 
