@@ -36,9 +36,6 @@
             
             <!-- <button id="add-note-btn">Add Note</button> -->
         </div>
-
-    
-    <script src="app.js"></script>
     
 </body>
 </html>

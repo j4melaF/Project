@@ -7,34 +7,137 @@
     <title>Create a Note</title>
 </head>
 <body class="antialiased">
-    <div class="container mx-auto p-4">
-        <h1 class="text-4xl font-bold mb-4">Create a Note</h1>
+<div class="container">
+    <h1 class="text-4xl font-bold mb-4">KeyNotes</h1>
 
+    <!-- Notes List Section -->
+
+    <div id="notesListSection">
+        <div id="notesList" class="mb-4"></div>
+        <button id="showCreateNoteForm" class="bg-violet-500 text-white rounded p-2">Create New Note</button>
+    </div>
+
+    <!-- Create Note Form Section (Initially Hidden) -->
+    <div id="createNoteSection" class="hidden">
+        <h2 class="text-2xl font-bold mb-4">Create a New Note</h2>
         <form id="noteForm">
-            <label for="title" class="block mb-2 text-2xl">Title:</label>
+            <label for="title">Title:</label>
             <input type="text" id="title" name="title" class="border rounded p-2 mb-4 w-full">
 
-            <label for="description" class="block mb-2 text-xl">Description:</label>
+            <label for="description">Description:</label>
             <input type="text" id="description" name="description" class="border rounded p-2 mb-4 w-full">
 
-            <label for="content" class="block mb-2 text-xl">Content:</label>
+            <label for="content">Content:</label>
             <textarea id="content" name="content" class="border rounded p-2 mb-4 w-full" required></textarea>
 
             <button type="submit" class="bg-violet-500 text-white rounded p-2">Create Note</button>
+            <button id="cancelCreateNote" type="button" class="bg-gray-500 text-white rounded p-2 ml-2">Cancel</button>
         </form>
-
-        <h2 class="text-xl font-bold mt-8">Your Notes:</h2>
-        <div id="notesList" class="mt-4"></div>
     </div>
+</div>
 
-    <script>
-    // Load notes from localStorage when the page loads
+<script>
+    function loadNotes() {
+        const notesList = document.getElementById('notesList');
+        notesList.innerHTML = ''; // Clear the notes list
+
+        const notes = JSON.parse(localStorage.getItem('notes')) || [];
+
+        notes.forEach((note, index) => {
+            const noteDiv = document.createElement('div');
+            noteDiv.className = 'note mb-4 p-4 border rounded bg-gray-100';
+
+            const isLongNote = note.content.length > 100;
+            const displayedContent = isLongNote ? note.content.slice(0, 100) + '...' : note.content;
+
+            noteDiv.innerHTML = `
+                <strong>${note.title || 'Untitled'}</strong>
+                <p><em>${note.description}</em></p>
+                <p class="noteContent">${displayedContent}</p>
+                <button class="edit-btn bg-violet-500 text-white rounded p-2 ml-">Edit</button>
+                <button class="delete-btn bg-violet-500 text-white rounded p-2 ml-2">Delete</button>
+            `;
+
+            // Read more / Read less functionality
+            if (isLongNote) {
+                // Create Read More link
+                const readMoreLink = document.createElement('span');
+                readMoreLink.className = 'readMore text-violet-500 cursor-pointer mt-2';
+                readMoreLink.textContent = 'Read More';
+
+                readMoreLink.addEventListener('click', function() {
+                    noteDiv.querySelector('.noteContent').textContent = note.content; // Show full content
+
+                    // Create Read Less link
+                    const readLessLink = document.createElement('span');
+                    readLessLink.className = 'readLess text-blue-500 cursor-pointer mt-2 ml-2';
+                    readLessLink.textContent = 'Read Less';
+
+                    // Add click event for Read Less link
+                    readLessLink.addEventListener('click', function() {
+                        noteDiv.querySelector('.noteContent').textContent = displayedContent; // Show truncated content
+                        this.remove(); // Remove Read Less link
+                        readMoreLink.style.display = ''; // Show Read More link again
+                    });
+
+                    noteDiv.appendChild(readLessLink); // Add Read Less link to the note
+                    this.style.display = 'none'; // Hide Read More link
+                });
+
+                noteDiv.appendChild(readMoreLink); // Add Read More link to the note
+            }
+
+            // Edit button functionality
+            noteDiv.querySelector('.edit-btn').addEventListener('click', function() {
+                document.getElementById('title').value = note.title; // Set title to input for editing
+                document.getElementById('description').value = note.description; // Set description to input for editing
+                document.getElementById('content').value = note.content; // Set content to input for editing
+                notes.splice(index, 1); // Remove the note from the array for re-adding
+                localStorage.setItem('notes', JSON.stringify(notes)); // Update local storage
+                loadNotes(); // Reload notes
+                notesListSection.classList.add('hidden'); // Hide notes section
+                createNoteSection.classList.remove('hidden'); // Show create section
+            });
+
+            // Delete button functionality
+            noteDiv.querySelector('.delete-btn').addEventListener('click', function() {
+                const confirmed = confirm("Are you sure you want to delete this note?");
+                if (confirmed) {
+                    notes.splice(index, 1); // Remove the note from the array
+                    localStorage.setItem('notes', JSON.stringify(notes)); // Update local storage
+                    loadNotes(); // Reload notes
+                }
+            });
+
+            // Append the new note to the list
+            notesList.appendChild(noteDiv);
+        });
+    }
+
+    // Initial load of notes
     window.onload = function() {
         loadNotes();
     };
 
+    // Show Create Note Form when button is clicked
+    document.getElementById('showCreateNoteForm').addEventListener('click', function() {
+        document.getElementById('notesListSection').classList.add('hidden');
+        document.getElementById('createNoteSection').classList.remove('hidden');
+    });
+
+    // Cancel creating note and go back to the notes list
+    document.getElementById('cancelCreateNote').addEventListener('click', function() {
+        document.getElementById('createNoteSection').classList.add('hidden');
+        document.getElementById('notesListSection').classList.remove('hidden');
+        // Clear input fields
+        document.getElementById('title').value = '';
+        document.getElementById('description').value = '';
+        document.getElementById('content').value = '';
+    });
+
+    // Handle form submission for creating a new note
     document.getElementById('noteForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the default form submission
+        event.preventDefault(); // Prevent form submission
 
         const titleInput = document.getElementById('title');
         const descriptionInput = document.getElementById('description');
@@ -45,94 +148,26 @@
         let content = contentInput.value.trim();
 
         if (content) {
+            const notes = JSON.parse(localStorage.getItem('notes')) || [];
             const note = { title, description, content };
+            notes.push(note); // Add new note to array
 
-            // Save note to localStorage
-            saveNoteToLocalStorage(note);
+            // Save notes back to localStorage
+            localStorage.setItem('notes', JSON.stringify(notes));
 
-            // Clear the form inputs
+            // Reload the notes list and switch back to the notes list section
+            loadNotes();
+            createNoteSection.classList.add('hidden');
+            notesListSection.classList.remove('hidden');
+
+            // Clear input fields
             titleInput.value = '';
             descriptionInput.value = '';
             contentInput.value = '';
-
-            // Load notes again to refresh the list
-            loadNotes();
         } else {
-            alert("Please enter some content for the note.");
+            alert("Content is required to create a note."); // Optional: Alert if content is missing
         }
     });
-
-    // Function to save notes to localStorage
-    function saveNoteToLocalStorage(note) {
-        const notes = JSON.parse(localStorage.getItem('notes')) || [];
-        notes.push(note);
-        localStorage.setItem('notes', JSON.stringify(notes));
-    }
-
-    // Function to load and display notes from localStorage
-    function loadNotes() {
-        const notesList = document.getElementById('notesList');
-        notesList.innerHTML = ''; // Clear existing notes
-
-        const notes = JSON.parse(localStorage.getItem('notes')) || [];
-        notes.forEach((note, index) => {
-            const noteDiv = document.createElement('div');
-            noteDiv.className = 'note mb-4 p-4 border rounded bg-gray-100';
-
-            const contentSnippet = note.content.split(' '); // Split content into words
-            let displayContent;
-            let readMoreHtml = '';
-
-            if (contentSnippet.length > 100) {
-                displayContent = contentSnippet.slice(0, 100).join(' ') + '...'; // Show first 100 words
-                readMoreHtml = `<span class="read-more text-violet-500 cursor-pointer">Read More</span>`;
-            } else {
-                displayContent = note.content; // Show full content if less than 100 words
-            }
-
-            noteDiv.innerHTML = `
-                <strong>${note.title}</strong>
-                <p><em>${note.description}</em></p>
-                <p class="noteContent">${displayContent} ${readMoreHtml}</p>
-                <button class="editButton bg-violet-500 text-white rounded p-1 mt-2">Edit</button>
-                <button class="deleteButton bg-violet-500 text-white rounded p-1 mt-2">Delete</button>
-            `;
-
-            // Add read more/less functionality
-            if (contentSnippet.length > 100) {
-                const noteContentEl = noteDiv.querySelector('.noteContent');
-                noteContentEl.addEventListener('click', function(e) {
-                    if (e.target.classList.contains('read-more')) {
-                        noteContentEl.innerHTML = `${note.content} <span class="read-less text-violet-500 cursor-pointer">Read Less</span>`;
-                    } else if (e.target.classList.contains('read-less')) {
-                        noteContentEl.innerHTML = `${displayContent} ${readMoreHtml}`;
-                    }
-                });
-            }
-
-            // Add edit button functionality
-            noteDiv.querySelector('.editButton').addEventListener('click', function() {
-                document.getElementById('title').value = note.title;
-                document.getElementById('description').value = note.description;
-                document.getElementById('content').value = note.content;
-                notesList.removeChild(noteDiv); // Remove the note from the list
-                notes.splice(index, 1); // Remove from localStorage
-                localStorage.setItem('notes', JSON.stringify(notes));
-            });
-
-            // Add delete button functionality
-            noteDiv.querySelector('.deleteButton').addEventListener('click', function() {
-                const confirmed = confirm("Are you sure you want to delete this note?");
-                if (confirmed) {
-                    notesList.removeChild(noteDiv); // Remove the note from the list
-                    notes.splice(index, 1); // Remove from localStorage
-                    localStorage.setItem('notes', JSON.stringify(notes));
-                }
-            });
-
-            notesList.appendChild(noteDiv); // Append note to the list
-        });
-    }
-    </script>
+</script>
 </body>
 </html>
