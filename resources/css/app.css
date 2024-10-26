@@ -2,53 +2,344 @@
 @tailwind components;
 @tailwind utilities;
 
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9; /* Light background color */
-    margin: 0; /* Remove default margin */
-    padding: 20px; /* Padding for body */
+    background-color: #FBBF24; /* Tailwind yellow */
+    color: #FFFFFF; /* White font */
+    margin: 0;
+    padding: 0;
 }
 
+/* Wrapper to Hold Sidebar and Main Container */
+.wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 200px; /* Default width */
+    background-color: #f3eced;
+    color: #ffffff;
+    padding: 20px;
+    transition: transform 0.3s ease; /* Slide-in transition */
+}
+
+/* Sidebar Header */
+.sidebar h2 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+/* Sidebar Button Styles */
+.sidebar button {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.sidebar button:hover {
+    background-color: #495057;
+}
+
+/* Class to Hide Sidebar */
+.sidebar-hidden {
+    transform: translateX(-100%);
+}
+
+/* Main Container Styles */
 .container {
-    max-width: 1200px; /* Maximum width for the container */
-    margin: 0 auto; /* Center the container */
-    padding: 20px; /* Padding for container */
+    flex: 1;
+    padding: 20px;
 }
 
-.content {
-    display: grid; /* Use grid layout */
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive columns */
-    gap: 15px; /* Space between notes */
+/* Notes Container for Grid Layout */
+.note-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+/* General Headings */
+h1, h2 {
+    color: #333;
+}
+
+/* Note Styles */
+.note {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    padding: 1rem;
+    transition: box-shadow 0.3s;
 }
 
 .note:hover {
-    transform: translateY(-2px); /* Slight lift effect on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.note-title {
-    font-weight: bold; /* Bold title */
-    font-size: 16px; /* Title font size */
-    color: #333; /* Dark text color */
+/* Buttons inside Notes */
+.note button {
+    margin-top: 10px;
 }
 
-.note-content {
-    color: #555; /* Gray text color */
-    margin: 5px 0; /* Margin for note content */
-    line-height: 1.4; /* Line height for readability */
-}
-
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 10px; /* Space between notes */
-    padding: 20px;
-}
-
-.note {
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
+/* Form Styles */
+form {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
     border-radius: 5px;
     padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
+}
+
+/* Input and Textarea Styling */
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+}
+
+input:focus, textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Styles for Archived and Trash Notes */
+.archive-note {
+    background-color: #fffbe6; /* Light yellow for archive notes */
+    border: 1px solid #ffeebb;
+}
+
+.trash-note {
+    background-color: #ffe6e6; /* Light red for trash notes */
+    border: 1px solid #ffcccc;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none;
+}
+
+/* Grid Container for Notes */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 10px;
+}
+
+/* Button Background Colors */
+.bg-violet-500 {
+    background-color: #6f42c1; /* Violet background */
+}
+
+.bg-yellow-500 {
+    background-color: #ffc107; /* Yellow background */
+}
+
+.bg-red-500 {
+    background-color: #dc3545; /* Red background */
+}
+
+.bg-green-500 {
+    background-color: #28a745; /* Green background */
+}
+
+.bg-gray-500 {
+    background-color: #6c757d; /* Gray background */
+}
+
+.bg-gray-700 {
+    background-color: #495057; /* Dark gray for sidebar buttons */
+}
+
+/* Text Colors and Sizes */
+.text-white {
+    color: #ffffff;
+}
+
+.text-lg {
+    font-size: 1.125rem;
+}
+
+.text-2xl {
+    font-size: 1.5rem;
+}
+
+.text-4xl {
+    font-size: 2.25rem;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Responsive Sidebar Behavior */
+@media (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%; /* Full width on small screens */
+        padding: 10px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+}
+
+/* Responsive Main Content Transition */
+.main-content {
+    transition: margin-left 0.5s;
+}
+
+.sidebar-closed {
+    margin-left: 0;
+}
+
+.sidebar-open {
+    margin-left: 300px; /* Width of the sidebar */
+}
+
+/* Button Styles */
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 12px 8px 16px;
+    gap: 8px;
+    height: 40px;
+    width: 128px;
+    border: none;
+    background: #056bfa27;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.lable {
+    margin-top: 1px;
+    font-size: 19px;
+    line-height: 22px;
+    color: #056dfa;
+    letter-spacing: 1px;
+}
+
+.button:hover {
+    background: #056bfa49;
+}
+
+.button:hover .svg-icon {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-8deg);
+    }
+
+    50% {
+        transform: rotate(0deg);
+    }
+
+    75% {
+        transform: rotate(8deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgb(20, 20, 20);
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+    cursor: pointer;
+    transition-duration: .3s;
+    overflow: hidden;
+    position: relative;
+}
+
+.svgIcon {
+    width: 12px;
+    transition-duration: .3s;
+}
+
+.svgIcon path {
+    fill: white;
+}
+
+.button:hover {
+    width: 140px;
+    border-radius: 50px;
+    transition-duration: .3s;
+    background-color: rgb(255, 69, 69);
+    align-items: center;
+}
+
+.button:hover .svgIcon {
+    width: 50px;
+    transition-duration: .3s;
+    transform: translateY(60%);
+}
+
+.button::before {
+    position: absolute;
+    top: -20px;
+    content: "Delete";
+    color: white;
+    transition-duration: .3s;
+}
+
+.button:hover::before {
+    font-size: 13px;
+    opacity: 1;
+    transform: translateY(30px);
+    transition-duration: .3s;
+}
+
+/* Additional Responsive Styles */
+@media (max-width: 480px) {
+    .sidebar {
+        padding: 5px; /* Reduce padding for mobile */
+    }
+
+    .sidebar button {
+        padding: 8px; /* Smaller buttons */
+    }
+
+    .note {
+        padding: 0.5rem; /* Smaller note padding */
+    }
+
+    h1, h2 {
+        font-size: 1.2rem; /* Smaller font sizes */
+    }
+
+    .lable {
+        font-size: 16px; /* Adjust label font size */
+    }
+
+    .button {
+        width: 40px; /* Smaller button size */
+        height: 40px;
+    }
 }
