@@ -1,213 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @vite('resources/css/app.css')
     <title>KeyNotes Sidebar</title>
+    @vite('resources/css/app.css')
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;800&display=swap" rel="stylesheet">
 </head>
 
-<body class="bg-yellow-600 font-[Poppins]">
-  <!-- Sidebar Toggle Button -->
-  <span class="absolute text-white text-4xl top-5 left-4 cursor-pointer" onclick="Openbar()">
-    <i class="bi bi-filter-left px-2 bg-yellow-900 rounded-md"></i>
-  </span>
+<body class="bg-yellow-600 font-[Poppins] flex">
+    <span class="absolute text-white text-4xl top-5 left-4 cursor-pointer" onclick="Openbar()">
+        <i class="bi bi-filter-left px-2 bg-yellow-900 rounded-md"></i>
+    </span>
 
-  <!-- Sidebar -->
-  <div class="sidebar fixed top-0 bottom-0 lg:left-0 left-[-300px] duration-1000 p-2 w-[300px] overflow-y-auto text-center bg-yellow-900 shadow h-screen">
-    <div class="text-#fce700-100 text-xl">
-      <div class="p-2.5 mt-1 flex items-center rounded-md">
-        <i class="bi bi-app-indicator px-2 py-1 bg-yellow-600 rounded-md"></i>
-        <h1 class="text-[15px] ml-3 text-xl text-yellow-200 font-bold">KeyNotes</h1>
-        <i class="bi bi-x ml-auto cursor-pointer lg:hidden" onclick="Openbar()"></i>
-      </div>
-      <hr class="my-2 text-yellow-600">
+    <div class="sidebar fixed top-0 bottom-0 lg:left-0 left-[-300px] duration-300 p-2 w-[300px] overflow-y-auto text-center bg-yellow-900 shadow h-screen">
+        <div class="text-#fce700-100 text-xl">
+            <div class="p-2.5 mt-1 flex items-center rounded-md">
+                <i class="bi bi-app-indicator px-2 py-1 bg-yellow-600 rounded-md text-white"></i>
+                <h1 class="text-[15px] ml-3 text-xl text-yellow-200 font-bold">KeyNotes</h1>
+                <i class="bi bi-x ml-auto cursor-pointer lg:hidden" onclick="Openbar()"></i>
+            </div>
 
-      <!-- Sidebar Options -->
-      <div>
-        <div class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer bg-yellow-700">
-          <i class="bi bi-search text-sm"></i>
-          <input class="text-[15px] ml-4 w-full bg-yellow focus:outline-none" placeholder="Search" />
+            <hr class="my-2 text-black-600">
+            <input type="text" id="searchInput" placeholder="Search Notes..." class="p-2 w-full mb-4 rounded" onkeyup="searchNotes()">
+            <div>
+                <div onclick="showSection('notesListSection')" class="p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-yellow-600 text-white">
+                    <i class="bi bi-journal"></i>
+                    <span class="text-[15px] ml-4">My Notes</span>
+                </div>
+                <div onclick="showSection('favoritesSection')" class="p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-yellow-600 text-white">
+                    <i class="bi bi-bookmark-fill"></i>
+                    <span class="text-[15px] ml-4">Favorites</span>
+                </div>
+                <div onclick="showSection('trashbinSection')" class="p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-yellow-600 text-white">
+                    <i class="bi bi-trash-fill"></i>
+                    <span class="text-[15px] ml-4">Trash Bin</span>
+                </div>
+                <div onclick="showSection('archiveSection')" class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-yellow-600 text-white">
+                    <i class="bi bi-archive"></i>
+                    <span class="text-[15px] ml-4">Archive</span>
+                </div>
+                <div onclick="showSection('createNoteSection')" class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-yellow-600 text-white">
+                    <i class="bi bi-plus-circle-fill"></i>
+                    <span class="text-[15px] ml-4">Create Note</span>
+                </div>
+            </div>
         </div>
-
-        <div onclick="showSection('notesListSection')" class="p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-yellow-600">
-          <i class="bi bi-journal"></i>
-          <span class="text-[15px] ml-4 text-gray-200">My Notes</span>
-        </div>
-        <div onclick="showSection('favoritesSection')" class="p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-yellow-600">
-          <i class="bi bi-bookmark-fill"></i>
-          <span class="text-[15px] ml-4 text-gray-200">Favorites</span>
-        </div>
-        <div onclick="showSection('trashBinSection')" class="p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-yellow-600">
-          <i class="bi bi-trash-fill"></i>
-          <span class="text-[15px] ml-4 text-gray-200">Trash Bin</span>
-        </div>
-        <div onclick="showSection('archiveSection')" class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-yellow-600">
-          <i class="bi bi-archive"></i>
-          <span class="text-[15px] ml-4 text-gray-200">Archive</span>
-        </div>
-        <div onclick="showSection('createNoteSection')" class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-yellow-600">
-          <i class="bi bi-plus-circle-fill"></i>
-          <span class="text-[15px] ml-4 text-gray-200">Create Note</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Main Content -->
-  <div id="mainContent" class="main-content p-6 ml-[-300px] transition-all duration-500">
-  <h1 class="text-4xl font-bold mb-4">KeyNotes</h1>
-
-    <!-- Notes List Section -->
-    <div id="notesListSection">
-      <div id="notesList" class="mb-4"></div>
     </div>
 
-    <!-- Create Note Form Section -->
-    <div id="createNoteSection" class="hidden">
-      <h2 class="text-2xl font-bold mb-4 text-white">Create Note</h2>
-      <form id="noteForm">
-        <label for="title" class="text-white">Title:</label>
-        <input type="text" id="title" name="title" class="border rounded p-2 mb-4 w-full">
+    <div class="main-content transition-all duration-300 flex-1 ml-[0px] lg:ml-[300px]">
+        <header class="flex justify-center">
+            <h1 class="text-2xl font-bold text-white p-4">My Notes</h1>
+        </header>
 
-        <label for="description" class="text-white">Description:</label>
-        <input type="text" id="description" name="description" class="border rounded p-2 mb-4 w-full">
+        <div id="notesListSection" class="note-list p-4">
+            <div id="notesList"></div>
+        </div>
 
-        <label for="content" class="text-white">Content:</label>
-        <textarea id="content" name="content" class="border rounded p-2 mb-4 w-full" required></textarea>
+        <div id="createNoteSection" class="hidden p-4">
+            <h2 class="text-2xl font-bold mb-4 text-white text-center">Create Note</h2>
+            <form id="noteForm" class="flex flex-col items-center">
+                <label for="title" class="text-white">Title:</label>
+                <input type="text" id="title" name="title" class="border rounded p-2 mb-4 w-full max-w-md">
+                <label for="description" class="text-white">Description:</label>
+                <input type="text" id="description" name="description" class="border rounded p-2 mb-4 w-full max-w-md">
+                <label for="content" class="text-white">Content:</label>
+                <textarea id="content" name="content" class="border rounded p-2 mb-4 w-full max-w-md" required></textarea>
+                <button type="submit" class="bg-yellow-500 text-white rounded p-2">Create Note</button>
+                <br>
+                <button type="button" class="bg-yellow-500 text-white rounded p-2 ml-2" onclick="showSection('notesListSection')">Cancel</button>
+            </form>
+        </div>
 
-        <button type="submit" id="submitNoteButton" class="bg-yellow-500 text-white rounded p-2">Create Note</button>
-        <button id="updateNoteButton" type="button" class="bg-yellow-500 text-white rounded p-2 hidden">Update Note</button>
-        <button id="cancelCreateNote" type="button" class="bg-yellow-500 text-white rounded p-2 ml-2">Cancel</button>
-      </form>
+        <div id="archiveSection" class="hidden p-4">
+            <h2 class="text-2xl font-bold mb-4 text-white">Archive</h2>
+            <div id="archiveList"></div>
+        </div>
+
+        <div id="trashbinSection" class="hidden p-4">
+            <h2 class="text-2xl font-bold mb-4 text-white">Trash Bin</h2>
+            <div id="trashbinList"></div>
+        </div>
+
+        <div id="favoritesSection" class="hidden p-4">
+            <h2 class="text-2xl font-bold mb-4 text-white">Favorites</h2>
+            <div id="favoritesList"></div>
+        </div>
     </div>
 
-    <!-- Favorites Section -->
-    <div id="favoritesSection" class="hidden">
-      <h2 class="text-2xl font-bold mb-4 text-white">Favorites</h2>
-      <div id="favoritesList" class="note-container"></div>
-    </div>
+    <script>
+        const sidebarWidth = 300;
+        const Openbar = () => {
+            const sidebar = document.querySelector(".sidebar");
+            const mainContent = document.querySelector(".main-content");
+            sidebar.classList.toggle("left-0");
+            sidebar.classList.toggle("left-[-300px]");
 
-    <!-- Archive Section -->
-    <div id="archiveSection" class="hidden">
-      <h2 class="text-2xl font-bold mb-4 text-white">Archive</h2>
-      <div id="archiveList" class="note-container"></div>
-    </div>
+            if (sidebar.classList.contains("left-0")) {
+                mainContent.style.marginLeft = `${sidebarWidth}px`;
+            } else {
+                mainContent.style.marginLeft = `0px`;
+            }
+        };
 
-    <!-- Trash Bin Section -->
-    <div id="trashBinSection" class="hidden">
-      <h2 class="text-2xl font-bold mb-4 text-ffc107">Trash Bin</h2>
-      <div id="trashBinList" class="note-container"></div>
-    </div>
-  </div>
+        const showSection = (sectionId) => {
+            const sections = document.querySelectorAll(".main-content > div");
+            sections.forEach(section => section.classList.add("hidden"));
+            document.getElementById(sectionId).classList.remove("hidden");
+            loadNotes(); // Load notes when displaying notes list
+            if (sectionId === 'trashbinSection') loadTrashbin();
+            if (sectionId === 'archiveSection') loadArchive();
+            if (sectionId === 'favoritesSection') loadFavorites();
+        };
 
-  <script>
-    let sidebarOpen = false; // Track sidebar state
+        function loadNotes() {
+            const notesList = document.getElementById('notesList');
+            notesList.innerHTML = '';
+            const notes = JSON.parse(localStorage.getItem('notes')) || [];
+            notes.forEach((note, index) => {
+                const noteDiv = createNoteDiv(note, index);
+                notesList.appendChild(noteDiv);
+            });
+        }
 
-    function Openbar() {
-      sidebarOpen = !sidebarOpen;
-      document.querySelector('.sidebar').classList.toggle('left-[-300px]');
-    }
+        function loadArchive() {
+            const archiveList = document.getElementById('archiveList');
+            archiveList.innerHTML = '';
+            const archive = JSON.parse(localStorage.getItem('archive')) || [];
+            archive.forEach((note, index) => {
+                const noteDiv = document.createElement('div');
+                noteDiv.className = 'note mb-4 p-4 border rounded bg-lightblue-200';
+                noteDiv.innerHTML = `
+                    <h3 class="font-bold">${note.title || 'Untitled'}</h3>
+                    <p>${note.description}</p>
+                    <p>${note.content.length > 100 ? note.content.substring(0, 100) + '...' : note.content}</p>
+                    <button class="bg-yellow-500 text-white rounded px-4 py-2" onclick="unarchiveNote(${index})">Unarchive</button>
+                `;
+                archiveList.appendChild(noteDiv);
+            });
+        }
 
-    function showSection(sectionId) {
-      const sections = ['notesListSection', 'favoritesSection', 'createNoteSection', 'archiveSection', 'trashBinSection'];
-      sections.forEach(id => {
-        document.getElementById(id).classList.add('hidden');
-      });
-      document.getElementById(sectionId).classList.remove('hidden');
-      // Close sidebar after selecting a section
-      if (sidebarOpen) {
-        Openbar();
-      }
-    }
+        function loadTrashbin() {
+            const trashbinList = document.getElementById('trashbinList');
+            trashbinList.innerHTML = '';
+            const trashbin = JSON.parse(localStorage.getItem('trashbin')) || [];
+            trashbin.forEach((note, index) => {
+                const noteDiv = document.createElement('div');
+                noteDiv.className = 'note mb-4 p-4 border rounded bg-lightblue-200';
+                noteDiv.innerHTML = `
+                    <h3 class="font-bold">${note.title || 'Untitled'}</h3>
+                    <p>${note.description}</p>
+                    <p>${note.content.length > 100 ? note.content.substring(0, 100) + '...' : note.content}</p>
+                    <button class="bg-yellow-500 text-white rounded px-4 py-2" onclick="recoverNote(${index})">Recover</button>
+                    <button class="bg-red-500 text-white rounded px-4 py-2" onclick="permanentlyDelete(${index})">Delete Forever</button>
+                `;
+                trashbinList.appendChild(noteDiv);
+            });
+        }
 
-    document.addEventListener('DOMContentLoaded', function () {
-      loadNotes();
+        function loadFavorites() {
+            const favoritesList = document.getElementById('favoritesList');
+            favoritesList.innerHTML = '';
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            favorites.forEach((note, index) => {
+                const noteDiv = document.createElement('div');
+                noteDiv.className = 'note mb-4 p-4 border rounded bg-lightblue-200';
+                noteDiv.innerHTML = `
+                    <h3 class="font-bold">${note.title || 'Untitled'}</h3>
+                    <p>${note.description}</p>
+                    <p>${note.content.length > 100 ? note.content.substring(0, 100) + '...' : note.content}</p>
+                    <button class="bg-red-500 text-white rounded px-4 py-2" onclick="removeFromFavorites(${index})">Remove from Favorites</button>
+                `;
+                favoritesList.appendChild(noteDiv);
+            });
+        }
 
-      document.getElementById('noteForm').addEventListener('submit', function (event) {
-        event.preventDefault();
-        const title = document.getElementById('title').value || 'Untitled'; // Set default title
-        const description = document.getElementById('description').value;
-        const content = document.getElementById('content').value;
+        function createNoteDiv(note, index) {
+            const noteDiv = document.createElement('div');
+            noteDiv.className = 'note mb-4 p-4 border rounded bg-lightblue-200';
+            noteDiv.innerHTML = `
+                <h3 class="font-bold">${note.title || 'Untitled'}</h3>
+                <p>${note.description}</p>
+                <p>${note.content.length > 100 ? note.content.substring(0, 100) + '...' : note.content}</p>
+                <button class="bg-yellow-500 text-white rounded px-4 py-2" onclick="editNote(${index})">Edit</button>
+                <button class="bg-red-500 text-white rounded px-4 py-2" onclick="deleteNote(${index})">Delete</button>
+                <button class="bg-blue-500 text-white rounded px-4 py-2" onclick="archiveNote(${index})">Archive</button>
+                <button class="bg-green-500 text-white rounded px-4 py-2" onclick="addToFavorites(${index})">Add to Favorites</button>
+            `;
+            return noteDiv;
+        }
 
-        const notes = JSON.parse(localStorage.getItem('notes')) || [];
-        notes.push({ title, description, content });
-        localStorage.setItem('notes', JSON.stringify(notes));
-        loadNotes();
-        showSection('notesListSection');
-        document.getElementById('noteForm').reset();
-      });
+        const addToFavorites = (index) => {
+            const notes = JSON.parse(localStorage.getItem('notes')) || [];
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            const note = notes.splice(index, 1)[0];
+            favorites.push(note);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            localStorage.setItem('notes', JSON.stringify(notes));
+            loadNotes();
+        };
 
-      document.getElementById('cancelCreateNote').addEventListener('click', function () {
-        showSection('notesListSection');
-      });
-    });
+        const archiveNote = (index) => {
+            const notes = JSON.parse(localStorage.getItem('notes')) || [];
+            const archive = JSON.parse(localStorage.getItem('archive')) || [];
+            const note = notes.splice(index, 1)[0];
+            archive.push(note);
+            localStorage.setItem('archive', JSON.stringify(archive));
+            localStorage.setItem('notes', JSON.stringify(notes));
+            loadNotes();
+        };
 
-    function loadNotes() {
-      const notesList = document.getElementById('notesList');
-      notesList.innerHTML = '';
-      const notes = JSON.parse(localStorage.getItem('notes')) || [];
-      notes.forEach((note, index) => {
-        const noteDiv = document.createElement('div');
-        noteDiv.className = 'note mb-4 p-4 border rounded bg-gray-100';
+        const deleteNote = (index) => {
+            const notes = JSON.parse(localStorage.getItem('notes')) || [];
+            const trashbin = JSON.parse(localStorage.getItem('trashbin')) || [];
+            const note = notes.splice(index, 1)[0];
+            trashbin.push(note);
+            localStorage.setItem('trashbin', JSON.stringify(trashbin));
+            localStorage.setItem('notes', JSON.stringify(notes));
+            loadNotes();
+        };
 
-        // Handle "Read More" and "Read Less" functionality
-        const contentPreview = note.content.length > 100 ? note.content.substring(0, 100) + '...' : note.content;
-        const readMoreHtml = note.content.length > 100 ? 
-          `<span class="content-preview">${contentPreview}</span>
-           <a href="#" class="read-more text-blue-500">Read More</a>
-           <span class="full-content hidden">${note.content}</span>
-           <a href="#" class="read-less text-blue-500 hidden">Read Less</a>` : 
-          `<span class="content-preview">${contentPreview}</span>`;
+        const recoverNote = (index) => {
+            const trashbin = JSON.parse(localStorage.getItem('trashbin')) || [];
+            const notes = JSON.parse(localStorage.getItem('notes')) || [];
+            const note = trashbin.splice(index, 1)[0];
+            notes.push(note);
+            localStorage.setItem('notes', JSON.stringify(notes));
+            localStorage.setItem('trashbin', JSON.stringify(trashbin));
+            loadTrashbin();
+            loadNotes();
+        };
 
-        noteDiv.innerHTML = `
-          <h3 class="font-bold">${note.title}</h3>
-          <p>${note.description}</p>
-          <div>${readMoreHtml}</div>
-          <button class="archive-btn bg-green-500 text-white rounded p-2 mt-2">Archive</button>
-            <button class="button mt-2">
-                <svg viewBox="0 0 448 512" class="svgIcon"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg>
-            </button>
-        `;
+        const permanentlyDelete = (index) => {
+            const trashbin = JSON.parse(localStorage.getItem('trashbin')) || [];
+            trashbin.splice(index, 1);
+            localStorage.setItem('trashbin', JSON.stringify(trashbin));
+            loadTrashbin();
+        };
 
-        // Add event listeners for "Read More" and "Read Less"
-        noteDiv.querySelector('.read-more')?.addEventListener('click', function (e) {
-          e.preventDefault();
-          noteDiv.querySelector('.content-preview').classList.add('hidden');
-          noteDiv.querySelector('.full-content').classList.remove('hidden');
-          noteDiv.querySelector('.read-more').classList.add('hidden');
-          noteDiv.querySelector('.read-less').classList.remove('hidden');
+        const unarchiveNote = (index) => {
+            const archive = JSON.parse(localStorage.getItem('archive')) || [];
+            const notes = JSON.parse(localStorage.getItem('notes')) || [];
+            const note = archive.splice(index, 1)[0];
+            notes.push(note);
+            localStorage.setItem('notes', JSON.stringify(notes));
+            localStorage.setItem('archive', JSON.stringify(archive));
+            loadArchive();
+            loadNotes();
+        };
+
+        const removeFromFavorites = (index) => {
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            const notes = JSON.parse(localStorage.getItem('notes')) || [];
+            const note = favorites.splice(index, 1)[0];
+            notes.push(note);
+            localStorage.setItem('notes', JSON.stringify(notes));
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            loadFavorites();
+            loadNotes();
+        };
+
+        document.getElementById('noteForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+            const content = document.getElementById('content').value;
+
+            const notes = JSON.parse(localStorage.getItem('notes')) || [];
+            notes.push({ title, description, content });
+            localStorage.setItem('notes', JSON.stringify(notes));
+            this.reset();
+            showSection('notesListSection');
         });
 
-        noteDiv.querySelector('.read-less')?.addEventListener('click', function (e) {
-          e.preventDefault();
-          noteDiv.querySelector('.content-preview').classList.remove('hidden');
-          noteDiv.querySelector('.full-content').classList.add('hidden');
-          noteDiv.querySelector('.read-more').classList.remove('hidden');
-          noteDiv.querySelector('.read-less').classList.add('hidden');
-        });
-
-        // Archive the note
-        noteDiv.querySelector('.archive-btn').addEventListener('click', function () {
-          const archive = JSON.parse(localStorage.getItem('archive')) || [];
-          archive.push(note);
-          localStorage.setItem('archive', JSON.stringify(archive));
-          loadNotes();
-        });
-
-        // Delete the note
-        noteDiv.querySelector('.delete-btn').addEventListener('click', function () {
-          notes.splice(index, 1);
-          localStorage.setItem('notes', JSON.stringify(notes));
-          loadNotes();
-        });
-
-        notesList.appendChild(noteDiv);
-      });
-    }
-  </script>
+        const searchNotes = () => {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const notesList = document.getElementById('notesList');
+            const notes = JSON.parse(localStorage.getItem('notes')) || [];
+            notesList.innerHTML = '';
+            notes.forEach((note, index) => {
+                if (note.title.toLowerCase().includes(input) || note.description.toLowerCase().includes(input)) {
+                    const noteDiv = createNoteDiv(note, index);
+                    notesList.appendChild(noteDiv);
+                }
+            });
+        };
+    </script>
 </body>
+
 </html>
