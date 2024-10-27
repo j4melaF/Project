@@ -11,7 +11,7 @@ class NoteController extends Controller
 
     public function notes()
     {
-        $notes = Note::orderBy('created_at', 'asc')->get();
+        $notes = Note::orderBy('created_at', 'desc')->get();
         return view('notes', ['notes' => $notes]);
     }
 
