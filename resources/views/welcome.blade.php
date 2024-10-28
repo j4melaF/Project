@@ -11,36 +11,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;800&display=swap" rel="stylesheet">
 </head>
 
-<<<<<<< HEAD
 <body class="bg-gray-100 font-[Poppins] flex">
-=======
-<body class="bg-yellow-600 font-[Poppins] flex">
->>>>>>> 09664ca83d47d378cd75cd943bf881adf96f1ca4
     <span class="absolute text-white text-4xl top-5 left-4 cursor-pointer" onclick="Openbar()">
         <i class="bi bi-filter-left px-2 bg-yellow-900 rounded-md"></i>
     </span>
 
-<<<<<<< HEAD
     <div class="sidebar fixed top-0 bottom-0 lg:left-0 left-[-300px] duration-300 p-2 w-[300px] overflow-y-auto text-center bg-#9cc5ed-400 shadow ">
         <div class="text-#fce700-100 text-xl">
             <div class="p-2.5 mt-1 flex items-center rounded-md">
                 <i class="bi bi-app-indicator px-2 py-1 bg-white-600 rounded-md text-white"></i>
                 <h1 class="text-[15px] ml-3 text-xl text-#9cc5ed-200 font-bold">KeyNotes</h1>
                 <i class="bi bi-x ml-auto cursor-pointer lg" onclick="Openbar()"></i>
-=======
-    <div class="sidebar fixed top-0 bottom-0 lg:left-0 left-[-300px] duration-300 p-2 w-[300px] overflow-y-auto text-center bg-yellow-900 shadow h-screen">
-        <div class="text-#fce700-100 text-xl">
-            <div class="p-2.5 mt-1 flex items-center rounded-md">
-                <i class="bi bi-app-indicator px-2 py-1 bg-yellow-600 rounded-md text-white"></i>
-                <h1 class="text-[15px] ml-3 text-xl text-yellow-200 font-bold">KeyNotes</h1>
-                <i class="bi bi-x ml-auto cursor-pointer lg:hidden" onclick="Openbar()"></i>
->>>>>>> 09664ca83d47d378cd75cd943bf881adf96f1ca4
             </div>
 
             <hr class="my-2 text-black-600">
             <input type="text" id="searchInput" placeholder="Search Notes..." class="p-2 w-full mb-4 rounded" onkeyup="searchNotes()">
             <div>
-<<<<<<< HEAD
                 <div onclick="showSection('notesListSection')" class="p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-400 text-white">
                     <i class="bi bi-journal"></i>
                     <span class="text-[15px] ml-4">My Notes</span>
@@ -58,25 +44,6 @@
                     <span class="text-[15px] ml-4">Archive</span>
                 </div>
                 <div onclick="showSection('createNoteSection')" class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-400 text-white">
-=======
-                <div onclick="showSection('notesListSection')" class="p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-yellow-600 text-white">
-                    <i class="bi bi-journal"></i>
-                    <span class="text-[15px] ml-4">My Notes</span>
-                </div>
-                <div onclick="showSection('favoritesSection')" class="p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-yellow-600 text-white">
-                    <i class="bi bi-bookmark-fill"></i>
-                    <span class="text-[15px] ml-4">Favorites</span>
-                </div>
-                <div onclick="showSection('trashbinSection')" class="p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-yellow-600 text-white">
-                    <i class="bi bi-trash-fill"></i>
-                    <span class="text-[15px] ml-4">Trash Bin</span>
-                </div>
-                <div onclick="showSection('archiveSection')" class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-yellow-600 text-white">
-                    <i class="bi bi-archive"></i>
-                    <span class="text-[15px] ml-4">Archive</span>
-                </div>
-                <div onclick="showSection('createNoteSection')" class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-yellow-600 text-white">
->>>>>>> 09664ca83d47d378cd75cd943bf881adf96f1ca4
                     <i class="bi bi-plus-circle-fill"></i>
                     <span class="text-[15px] ml-4">Create Note</span>
                 </div>
@@ -85,16 +52,11 @@
     </div>
 
     <div class="main-content transition-all duration-300 flex-1 ml-[0px] lg:ml-[300px]">
-<<<<<<< HEAD
         <header class="flex-col justify-center">
-            <h1 class="text-2xl font-bold text-blue-300 p-4">My Notes</h1>
+            <h1 class="text-3xl font-bold text-blue-300 p-4">My Notes</h1>
             <div class="-mt-5">
                 <h3 class="text-sm italic text-blue-300">keep note everything</h3>
             </div>
-=======
-        <header class="flex justify-center">
-            <h1 class="text-2xl font-bold text-white p-4">My Notes</h1>
->>>>>>> 09664ca83d47d378cd75cd943bf881adf96f1ca4
         </header>
 
         <div id="notesListSection" class="note-list p-4">
@@ -102,7 +64,6 @@
         </div>
 
         <div id="createNoteSection" class="hidden p-4">
-<<<<<<< HEAD
             <h2 class="text-2xl font-bold mb-4 text-blue-300 text-center">Create Note</h2>
             <form id="noteForm" class="flex flex-col items-center">
                 <label for="title" class="text-blue-300 font-bold">Title:</label>
@@ -114,46 +75,21 @@
                 <button type="submit" class="bg-blue-400 text-white rounded p-2">Create Note</button>
                 <br>
                 <button type="button" class="bg-blue-400 text-white rounded p-2 ml-2" onclick="showSection('notesListSection')">Cancel</button>
-=======
-            <h2 class="text-2xl font-bold mb-4 text-white text-center">Create Note</h2>
-            <form id="noteForm" class="flex flex-col items-center">
-                <label for="title" class="text-white">Title:</label>
-                <input type="text" id="title" name="title" class="border rounded p-2 mb-4 w-full max-w-md">
-                <label for="description" class="text-white">Description:</label>
-                <input type="text" id="description" name="description" class="border rounded p-2 mb-4 w-full max-w-md">
-                <label for="content" class="text-white">Content:</label>
-                <textarea id="content" name="content" class="border rounded p-2 mb-4 w-full max-w-md" required></textarea>
-                <button type="submit" class="bg-yellow-500 text-white rounded p-2">Create Note</button>
-                <br>
-                <button type="button" class="bg-yellow-500 text-white rounded p-2 ml-2" onclick="showSection('notesListSection')">Cancel</button>
->>>>>>> 09664ca83d47d378cd75cd943bf881adf96f1ca4
             </form>
         </div>
 
         <div id="archiveSection" class="hidden p-4">
-<<<<<<< HEAD
             <h2 class="text-2xl font-bold mb-4 text-blue-300">Archive</h2>
-=======
-            <h2 class="text-2xl font-bold mb-4 text-white">Archive</h2>
->>>>>>> 09664ca83d47d378cd75cd943bf881adf96f1ca4
             <div id="archiveList"></div>
         </div>
 
         <div id="trashbinSection" class="hidden p-4">
-<<<<<<< HEAD
             <h2 class="text-2xl font-bold mb-4 text-blue-300">Trash Bin</h2>
-=======
-            <h2 class="text-2xl font-bold mb-4 text-white">Trash Bin</h2>
->>>>>>> 09664ca83d47d378cd75cd943bf881adf96f1ca4
             <div id="trashbinList"></div>
         </div>
 
         <div id="favoritesSection" class="hidden p-4">
-<<<<<<< HEAD
             <h2 class="text-2xl font-bold mb-4 text-blue-300">Favorites</h2>
-=======
-            <h2 class="text-2xl font-bold mb-4 text-white">Favorites</h2>
->>>>>>> 09664ca83d47d378cd75cd943bf881adf96f1ca4
             <div id="favoritesList"></div>
         </div>
     </div>
@@ -280,6 +216,20 @@
             loadNotes();
         };
 
+        function editNote(index) {
+            const notes = JSON.parse(localStorage.getItem('notes')) || [];
+            const note = notes[index];
+            document.getElementById('title').value = note.title;
+            document.getElementById('description').value = note.description;
+            document.getElementById('body').value = note.body;
+
+            notes.splice(index, 1);
+            localStorage.setItem('notes', JSON.stringify(notes));
+            showSection('createNoteSection');
+            loadNotes();
+        };
+
+
         const deleteNote = (index) => {
             const notes = JSON.parse(localStorage.getItem('notes')) || [];
             const trashbin = JSON.parse(localStorage.getItem('trashbin')) || [];
@@ -288,7 +238,36 @@
             localStorage.setItem('trashbin', JSON.stringify(trashbin));
             localStorage.setItem('notes', JSON.stringify(notes));
             loadNotes();
+
+        // // Create the notification container
+        // const notification = document.createElement("div");
+        // notification.setAttribute("role", "alert");
+        // notification.className = "mx-auto max-w-lg rounded-lg border border-stone bg-stone-100 p-4 shadow-lg sm:p-6 lg:p-8";
+
+        // // Inner HTML structure of the notification
+        // notification.innerHTML = `
+        // <div class="flex items-center gap-4">
+        //     <span class="shrink-0 rounded-full bg-emerald-400 p-2 text-white">
+        //     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+        //         <path fill-rule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z" clip-rule="evenodd"></path>
+        //     </svg>
+        //     </span>
+        //     <p class="font-medium sm:text-lg text-emerald-600">New notification!</p>
+        // </div>
+        // <p class="mt-4 text-gray-600">
+        //     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore?
+        // </p>
+        // <div class="mt-6 sm:flex sm:gap-4">
+        //     <a href="#" class="inline-block w-full rounded-lg bg-emerald-500 px-5 py-3 text-center text-sm font-semibold text-white sm:w-auto">View</a>
+        //     <a href="#" class="mt-2 inline-block w-full rounded-lg bg-stone-300 px-5 py-3 text-center text-sm font-semibold text-gray-800 sm:mt-0 sm:w-auto">Dismiss</a>
+        // </div>
+        // `;
+
+        // // Append the notification to the body or another container element
+        // document.body.appendChild(notification);
+            
         };
+    
 
         const recoverNote = (index) => {
             const trashbin = JSON.parse(localStorage.getItem('trashbin')) || [];
@@ -356,10 +335,7 @@
             });
         };
     </script>
+  
 </body>
 
-<<<<<<< HEAD
 </html> 
-=======
-</html>
->>>>>>> 09664ca83d47d378cd75cd943bf881adf96f1ca4
