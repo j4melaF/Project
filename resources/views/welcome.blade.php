@@ -140,7 +140,7 @@
                     <h3 class="font-bold">${note.title || 'Untitled'}</h3>
                     <p>${note.description}</p>
                     <p>${note.content.length > 100 ? note.content.substring(0, 100) + '...' : note.content}</p>
-                    <button class="bg-yellow-500 text-white rounded px-4 py-2" onclick="unarchiveNote(${index})">Unarchive</button>
+                    <button class="bg-blue-400 text-white rounded px-4 py-2" onclick="unarchiveNote(${index})">Unarchive</button>
                 `;
                 archiveList.appendChild(noteDiv);
             });
@@ -157,8 +157,8 @@
                     <h3 class="font-bold">${note.title || 'Untitled'}</h3>
                     <p>${note.description}</p>
                     <p>${note.content.length > 100 ? note.content.substring(0, 100) + '...' : note.content}</p>
-                    <button class="bg-yellow-500 text-white rounded px-4 py-2" onclick="recoverNote(${index})">Recover</button>
-                    <button class="bg-red-500 text-white rounded px-4 py-2" onclick="permanentlyDelete(${index})">Delete Forever</button>
+                    <button class="bg-blue-500 text-white rounded px-4 py-2" onclick="recoverNote(${index})">Recover</button>
+                    <button class="bg-blue-400 text-white rounded px-4 py-2" onclick="permanentlyDelete(${index})">Delete Forever</button>
                 `;
                 trashbinList.appendChild(noteDiv);
             });
@@ -175,7 +175,7 @@
                     <h3 class="font-bold">${note.title || 'Untitled'}</h3>
                     <p>${note.description}</p>
                     <p>${note.content.length > 100 ? note.content.substring(0, 100) + '...' : note.content}</p>
-                    <button class="bg-red-500 text-white rounded px-4 py-2" onclick="removeFromFavorites(${index})">Remove from Favorites</button>
+                    <button class="bg-blue-400 text-white rounded px-4 py-2" onclick="removeFromFavorites(${index})">Remove from Favorites</button>
                 `;
                 favoritesList.appendChild(noteDiv);
             });
@@ -188,10 +188,10 @@
                 <h3 class="font-bold">${note.title || 'Untitled'}</h3>
                 <p>${note.description}</p>
                 <p>${note.content.length > 100 ? note.content.substring(0, 100) + '...' : note.content}</p>
-                <button class="bg-yellow-500 text-white rounded px-4 py-2" onclick="editNote(${index})">Edit</button>
-                <button class="bg-red-500 text-white rounded px-4 py-2" onclick="deleteNote(${index})">Delete</button>
+                <button class="bg-blue-300 text-white rounded px-4 py-2" onclick="editNote(${index})">Edit</button>
+                <button class="bg-blue-700 text-white rounded px-4 py-2" onclick="deleteNote(${index})">Delete</button>
                 <button class="bg-blue-500 text-white rounded px-4 py-2" onclick="archiveNote(${index})">Archive</button>
-                <button class="bg-green-500 text-white rounded px-4 py-2" onclick="addToFavorites(${index})">Add to Favorites</button>
+                <button class="bg-blue-400 text-white rounded px-4 py-2" onclick="addToFavorites(${index})">Add to Favorites</button>
             `;
             return noteDiv;
         }
@@ -221,14 +221,12 @@
             const note = notes[index];
             document.getElementById('title').value = note.title;
             document.getElementById('description').value = note.description;
-            document.getElementById('body').value = note.body;
+            document.getElementById('content').value = note.content;
 
             notes.splice(index, 1);
             localStorage.setItem('notes', JSON.stringify(notes));
             showSection('createNoteSection');
-            loadNotes();
         };
-
 
         const deleteNote = (index) => {
             const notes = JSON.parse(localStorage.getItem('notes')) || [];
@@ -239,33 +237,6 @@
             localStorage.setItem('notes', JSON.stringify(notes));
             loadNotes();
 
-        // // Create the notification container
-        // const notification = document.createElement("div");
-        // notification.setAttribute("role", "alert");
-        // notification.className = "mx-auto max-w-lg rounded-lg border border-stone bg-stone-100 p-4 shadow-lg sm:p-6 lg:p-8";
-
-        // // Inner HTML structure of the notification
-        // notification.innerHTML = `
-        // <div class="flex items-center gap-4">
-        //     <span class="shrink-0 rounded-full bg-emerald-400 p-2 text-white">
-        //     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
-        //         <path fill-rule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z" clip-rule="evenodd"></path>
-        //     </svg>
-        //     </span>
-        //     <p class="font-medium sm:text-lg text-emerald-600">New notification!</p>
-        // </div>
-        // <p class="mt-4 text-gray-600">
-        //     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore?
-        // </p>
-        // <div class="mt-6 sm:flex sm:gap-4">
-        //     <a href="#" class="inline-block w-full rounded-lg bg-emerald-500 px-5 py-3 text-center text-sm font-semibold text-white sm:w-auto">View</a>
-        //     <a href="#" class="mt-2 inline-block w-full rounded-lg bg-stone-300 px-5 py-3 text-center text-sm font-semibold text-gray-800 sm:mt-0 sm:w-auto">Dismiss</a>
-        // </div>
-        // `;
-
-        // // Append the notification to the body or another container element
-        // document.body.appendChild(notification);
-            
         };
     
 

@@ -1,4 +1,4 @@
-{{-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -39,14 +39,8 @@
             <form action="{{ route('notes')}}" method="GET">
                 <button class="bg-blue-400 p-2 rounded-full shadow-md text-white hover:bg-blue-500" type="submit">Back to Notes</button>
             </form>
-<<<<<<< HEAD
 
         
-=======
-            
-            <!-- <button id="add-note-btn">Add Note</button> -->
-        </div>
->>>>>>> 09664ca83d47d378cd75cd943bf881adf96f1ca4
     
 </body>
-</html> --}}
+</html>
