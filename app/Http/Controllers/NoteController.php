@@ -11,8 +11,15 @@ class NoteController extends Controller
 
     public function notes()
     {
-        $notes = Note::orderBy('created_at', 'desc')->get();
-        return view('notes', ['notes' => $notes]);
+        $search = $request['search'] ?? "";
+        if ($search != "")
+        {
+            $notes = Note::where('title', 'LIKE', "%$search%")->get();
+        }else {
+            $notes = Note::orderBy('created_at', 'desc')->get();
+        }
+     
+        return view('notes', ['notes' => $notes, 'search' => $search]);
     }
 
     public function showNotes($id)
@@ -28,20 +35,6 @@ class NoteController extends Controller
         return view('note', ['note' => $note]); //return note
 
 
-    }
-
-    public function view(Request $request)
-    {
-        $search = $request['search'] ?? "";
-        if ($search != "")
-        {
-            $notes = Note::where('title', 'LIKE', "%$search")->get();
-        }else {
-            $notes = Note::all();
-        }
-
-        $data = compact('note', 'search');
-        return view('note-view')->with($data);
     }
 
     public function createNote(Request $request)
@@ -118,11 +111,6 @@ class NoteController extends Controller
         return redirect()->route('notes')->with('success','Note deleted successfully.');
 
     }
-
-
-
-
-
 
 
 }

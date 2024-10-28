@@ -10,10 +10,6 @@ class Note extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'description',
-        'body',
+        'title', 'description', 'content', 'archived', 'trashed', 'favorite',
     ];
-
-    
 }
