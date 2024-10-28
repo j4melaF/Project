@@ -180,7 +180,7 @@
                 favoritesList.appendChild(noteDiv);
             });
         }
-
+// bdgasbdjasd
         function createNoteDiv(note, index) {
             const noteDiv = document.createElement('div');
             noteDiv.className = 'note mb-4 p-4 border rounded bg-lightblue-200';
