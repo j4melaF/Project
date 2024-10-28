@@ -16,26 +16,37 @@
     <form action="/create" method="GET">
         <button type="submit">Create Note</button>
     </form> <br>
-    <div class="p-4 bg-blue-200 min-h-screen flex justify-center items-center">
 
-            <div class="bg-blue-300 p-4 rounded-md shadow-md w-100">
+    <div class="container">
+        <div class="row m-2">
+            <form action="" class="col-9">
+                <div class="form-group">
+                    <input type="search" name="search" id="" class="form-control" placeholder="Search note" value="{{$search}}">
+                </div>
+                <button class="btn btn-primary">Search</button>
+            </form>
+
+        </div>
+               
+    @foreach ($notes as $note)
+                            
+    <form action="{{ route('showNotes', ['id' => $note->id])}}"  method="GET"> 
+        <button type="submit">
+            <div><h3>Title: {{ $note->title}}</h3></div>
+            <div class="space-y-3">
+            <div><textarea>Description: {{ $note->description}}</textarea></div>
+            <div> {{ $note->body}}</div> <br>
             
-                <div class="bg-blue-100 p-4 rounded-md shadow-sm">                
-                    @foreach ($notes as $note)
-                            
-                            <form action="{{ route('showNotes', ['id' => $note->id])}}"  method="GET"> 
-                                <button class="text-gray-600 hover:text-black" type="submit">
-                                    <div><h3 class="font-bold text-lg">Title: {{ $note->title}}</h3></div>
-                                    <div class="space-y-3">
-                                    <div><p class="text-sm text-gray-600">Description: {{ $note->description}}</p></div>
-                                    <div class="text-left"> {{ $note->body}}</div> <br>
-                                    
-                                </button>
-                            
-                            </form>  
-                
-                    @endforeach   
-                    <hr>     
+        </button>
+    
+    </form>  
+
+    @endforeach   
+    <hr>     
+        
+
+
+
                 </div>
                 
             

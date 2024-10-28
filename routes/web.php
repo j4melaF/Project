@@ -14,3 +14,4 @@ Route::post('/note/create', [NoteController::class, 'createNoteSubmit'])->name('
 Route::get('/note/edit/{id}', [NoteController::class, 'editNote'])->name('editNote');
 Route::post('/note/update/{id}', [NoteController::class, 'updateNote'])->name('updateNote');
 Route::post('/note/delete/{id}', [NoteController::class, 'deleteNote'])->name('deleteNote');
+Route::get('/note', [NoteController::class, "view"]);

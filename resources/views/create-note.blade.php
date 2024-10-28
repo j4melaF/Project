@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;800&display=swap" rel="stylesheet">
-    {{-- <link rel="stylesheet" href="style.css"> --}}
+
 
 </head>
 <body>
@@ -19,7 +19,7 @@
 
         <div class="note-input">
             <div class="min-h-screen flex justify-center items-center bg-gray-100 p-4">
-                <!-- Main Container -->
+            
                 <div class="bg-blue-100 w-full max-w-lg p-6 rounded-lg shadow-lg flex flex-col">
         
             <form action="{{ route('createNoteSubmit') }}" method="POST">
@@ -39,9 +39,8 @@
             <form action="{{ route('notes')}}" method="GET">
                 <button class="bg-blue-400 p-2 rounded-full shadow-md text-white hover:bg-blue-500" type="submit">Back to Notes</button>
             </form>
-            
-            <!-- <button id="add-note-btn">Add Note</button> -->
-        </div>
+
+        
     
 </body>
 </html>

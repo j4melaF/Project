@@ -30,6 +30,20 @@ class NoteController extends Controller
 
     }
 
+    public function view(Request $request)
+    {
+        $search = $request['search'] ?? "";
+        if ($search != "")
+        {
+            $notes = Note::where('title', 'LIKE', "%$search")->get();
+        }else {
+            $notes = Note::all();
+        }
+
+        $data = compact('note', 'search');
+        return view('note-view')->with($data);
+    }
+
     public function createNote(Request $request)
     {
         return view('create-note');
