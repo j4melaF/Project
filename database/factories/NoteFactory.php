@@ -20,7 +20,7 @@ class NoteFactory extends Factory
         return [
             'title' => fake()->title(),
             'description' => Str::random(20),
-            'body' => Str::random(10000)
+            'content' => Str::random(10000)
 
         ];
     }

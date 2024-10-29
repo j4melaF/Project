@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
     <title>Create Note</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;800&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
@@ -25,13 +22,13 @@
             <form action="{{ route('createNoteSubmit') }}" method="POST">
                 @csrf
                 <label for="title">Title:</label>
-                <input class="text-black" type="text" id="title" name="title"><br>
+                <input class="text-black" type="text" id="title" name="title" nullable ><br>
 
                 <label for="description">Description:</label>
-                <input class="text-black" type="text" id="description" name="description"><br>
+                <input class="text-black" type="text" id="description" name="description"nullable><br>
 
-                <label for="body"></label>
-                <textarea class="text-black" id="body" name="body" cols="30" rows="10" placeholder="Write your note here..."></textarea>
+                <label for="body">Content:</label>
+                <textarea class="text-black" id="body" name="body" cols="30" rows="10" placeholder="Write your note here..." required></textarea>
 
                 <button class="bg-blue-400 p-2 rounded-full shadow-md text-white hover:bg-blue-500" type="submit">Add Note</button>
             </form> <br>
@@ -39,8 +36,8 @@
             <form action="{{ route('notes')}}" method="GET">
                 <button class="bg-blue-400 p-2 rounded-full shadow-md text-white hover:bg-blue-500" type="submit">Back to Notes</button>
             </form>
-
-        
+            
+        </div>
     
 </body>
 </html>

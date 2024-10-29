@@ -1,15 +1,12 @@
 <?php
-
 namespace App\Http\Controllers;
-use App\Models\Note;
 
+use App\Models\Note;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
-
-
-    public function notes()
+    public function notes(Request $request)
     {
         $search = $request['search'] ?? "";
         if ($search != "")
@@ -47,7 +44,7 @@ class NoteController extends Controller
         $validated = $request->validate([
             'title' => 'string|max:255',
             'description' => 'string|max:255',
-            'body' => 'required|string',
+            'body' => 'required|string'
 
         ]);
 
@@ -79,7 +76,7 @@ class NoteController extends Controller
         $validated = $request->validate([
             'title' => 'string|max:255',
             'description' => 'string|max:255',
-            'body' => 'required|string',
+            'content' => 'required|string',
 
         ]);
 
@@ -93,24 +90,10 @@ class NoteController extends Controller
 
         $note->title = $validated['title'];
         $note->description = $validated['description'];
-        $note->body = $validated['body'];
+        $note->body = $validated['content'];
         $note->save();
 
         return redirect()->route('showNotes', ['id' => $note->id])->with('success','Note updated Successfully.');
         
     }
-
-    public function deleteNote(Request $request)
-    {
-        $note = Note::find($request->id);
-
-        if ($note)
-        {
-            $note->delete();
-        }
-        return redirect()->route('notes')->with('success','Note deleted successfully.');
-
-    }
-
-
 }

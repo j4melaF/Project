@@ -15,8 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->longText('body');
+            $table->text('content');
+            $table->boolean('favorite')->default(false);
+            $table->boolean('archived')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,7 +29,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('notes', function (Blueprint $table) {
-            $table->dropColumn('title');
+            Schema::dropIfExists('notes');
         });
     }
 };

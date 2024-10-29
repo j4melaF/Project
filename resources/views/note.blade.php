@@ -21,7 +21,7 @@
 
                 <div><b>Title:</b> {{ $note->title}}</div>
                 <div><b>Description:</b> {{ $note->description}}</div>
-                <div><b>Body:</b> {{ $note->body}}</div> <br>
+                <div><b>Content:</b> {{ $note->body}}</div> <br>
 
                 <form action="{{ route('editNote', ['id' => $note->id])}}" method="GET">
                         <button class="bg-blue-400 p-2 rounded-full shadow-md text-white hover:bg-blue-500" type="submit">Edit Note</button>

@@ -23,7 +23,7 @@
                     <label for="descrition">Description:</label>
                     <input type="text" id="description" name="description" value="{{ $note->description}}"><br>
 
-                    <label for="body">Body:</label>
+                    <label for="body">Content:</label>
                     <textarea type="text" id="body" name="body" rows="10" required>{{ $note->body}}</textarea><br>
 
                     <button type="Submit">Update Note</button>
